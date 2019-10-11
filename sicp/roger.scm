@@ -5,6 +5,7 @@
 ; hidekuno@gmail.com
 ;
 (define roger "roger")
-(create-image-from-png roger "/home/kunohi/rust-elisp/glisp/samples/sicp/sicp.png")
+(create-image-from-png roger
+                       (string-append (get-environment-variable "HOME") "/picture-language/sicp/sicp.png"))
 (define gframe (make-image-frame roger 3))
 ;;((square-limit (paint-image roger) 4) gframe)
