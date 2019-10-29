@@ -3,7 +3,6 @@
 ;
 ; hidekuno@gmail.com
 ;
-
 ;;========================================================================
 ;; 線を描画する
 ;;========================================================================
@@ -13,7 +12,36 @@
    ((frame-coord-map f) (end-segment s))))
 
 ;;========================================================================
+;; コッホ曲線(paint版)
+;; ((square-limit (koch 4) 0) frame)
+;;========================================================================
+(define (koch n)
+  (lambda (frame)
+    (define (koch-iter x0 y0 x1 y1 c)
+      (let ((kcos (cs 60))
+            (ksin (sn 60)))
+        (if (> c 1)
+            (let (
+                  (xa (/ (+ (* x0 2) x1) 3))
+                  (ya (/ (+ (* y0 2) y1) 3))
+                  (xb (/ (+ (* x1 2) x0) 3))
+                  (yb (/ (+ (* y1 2) y0) 3)))
+              (let ((yc (+ ya (+ (* (- xb xa) ksin) (* (- yb ya) kcos))))
+                    (xc (+ xa (- (* (- xb xa) kcos) (* (- yb ya) ksin)))))
+                (koch-iter x0 y0 xa  ya (- c 1))
+                (koch-iter xa ya xc  yc (- c 1))
+                (koch-iter xc yc xb  yb (- c 1))
+                (koch-iter xb yb x1  y1 (- c 1))))
+
+            (draw-line-segment (make-segment (make-vect x0 y0) (make-vect x1 y1)) frame))))
+
+    (koch-iter 0.3597222222222222 0.0 0.04722222222222222 0.6964285714285714 n)
+    (koch-iter 0.04722222222222222 0.6964285714285714 0.6708333333333333 0.6964285714285714 n)
+    (koch-iter 0.6708333333333333 0.6964285714285714 0.3597222222222222 0.0 n)))
+
+;;========================================================================
 ;; ツリーカーブ(paint版)
+;; ((square-limit (tree 14) 0) frame)
 ;;========================================================================
 (define (tree n)
   (lambda (frame)
@@ -34,10 +62,10 @@
                 (tree-iter x1 y1 xa ya (- c 1))
                 (tree-iter x1 y1 xb yb (- c 1)))))))
     (tree-iter 0.4166666666666667 0.7142857142857143 0.4166666666666667 0.5357142857142857 n)))
-;;((square-limit (tree 14) 0) frame)
 
 ;;========================================================================
 ;; sierpinski(paint版)
+;;((square-limit (sierpinski 8) 0) frame)
 ;;========================================================================
 (define (sierpinski n)
   (lambda (frame)
@@ -55,11 +83,34 @@
             (draw-line-segment (make-segment (make-vect x0 y0) (make-vect x1 y1)) frame)
             (draw-line-segment (make-segment (make-vect x1 y1) (make-vect x2 y2)) frame)
             (draw-line-segment (make-segment (make-vect x2 y2) (make-vect x0 y0)) frame))))
-    (sierpinski-iter 0.44428969359331477 0.07168458781362007 0.04178272980501393 0.7706093189964157 0.8481894150417827 0.7706093189964157 n)))
-;;((square-limit (sierpinski 8) 0) frame)
+    (sierpinski-iter 
+     0.44428969359331477 0.07168458781362007 
+     0.04178272980501393 0.7706093189964157
+     0.8481894150417827 0.7706093189964157 n)))
+
+;;========================================================================
+;; ドラゴン曲線(paint版)
+;;((square-limit (dragon-curve 8) 0) frame)
+;;========================================================================
+(define (dragon-curve n)
+  (lambda (frame)
+    (define (dragon-curve-iter xa ya xb yb n)
+      (let ((xx (- xb xa))
+            (yy (* -1 (- yb ya))))
+        (let ((xc (+ xa (/ (+ xx yy) 2)))
+              (yc (+ yb (/ (+ xx yy) 2))))
+          (if (>= 0 n)
+              (begin
+                (draw-line-segment (make-segment (make-vect xa ya) (make-vect xc yc)) frame)
+                (draw-line-segment (make-segment (make-vect xb yb) (make-vect xc yc)) frame))
+              (begin
+                (dragon-curve-iter xa ya xc yc (- n 1))
+                (dragon-curve-iter xb yb xc yc (- n 1)))))))
+    (dragon-curve-iter 0.2777777777777778 0.25 0.5972222222222222 0.625 n)))
 
 ;;========================================================================
 ;; ヒルベルト曲線(paint版)
+;; ((transform-painter (hilbert 6)(make-vect 0.15 0.0)(make-vect 0.9 0.0)(make-vect 0.15 0.75)) frame)
 ;;========================================================================
 (define (hilbert c)
   (lambda (frame)
@@ -107,4 +158,3 @@
             (dlu (- c 1))(set! y (- y lgth))(line)
             (rul (- c 1)))))
     (ldr c)))
-;;((transform-painter (hilbert 6)(make-vect 0.15 0.0)(make-vect 0.9 0.0)(make-vect 0.15 0.75)) frame)
