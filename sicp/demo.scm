@@ -3,12 +3,29 @@
 ;
 ; hidekuno@gmail.com
 ;
+
 (define (demo)
-  (let ((dframe (make-frame (make-vect 0.45  0.55)(make-vect 0.45  0)(make-vect 0  0.45)))
-        (frame (make-frame (make-vect 0  0.57)(make-vect 0.45  0)(make-vect 0 0.45)))
-        (sframe (make-frame (make-vect 0 0)(make-vect 0.45 0)(make-vect 0 0.5714285714285714)))
-        (gframe (make-frame (make-vect 0.472  0) (make-vect 0.375  0) (make-vect 0 0.48214285714285715))))
-    ((square-limit wave 4) sframe)
-    ((square-limit (paint-image roger) 4) gframe)
-    ((square-limit (sierpinski 6) 0) frame)
-    ((square-limit (tree 10) 0) dframe)))
+  (let ((width  (lambda (n)(if (= 2 (gtk-major-version))(* n (screen-width)) n)))
+        (height (lambda (n)(if (= 2 (gtk-major-version))(* n (screen-height))n))))
+    (let ((dframe (make-frame 
+                   (make-vect (width 0.45)(height 0.55))
+                   (make-vect (width 0.45)(height 0))
+                   (make-vect (width 0   )(height 0.45))))
+          (frame  (make-frame 
+                   (make-vect (width 0)   (height 0.57))
+                   (make-vect (width 0.45)(height   0))
+                   (make-vect (width 0)   (height 0.45))))
+          (sframe (make-frame 
+                   (make-vect (width 0)   (height  0))
+                   (make-vect (width 0.45)(height  0))
+                   (make-vect (width 0)   (height  0.5714285714285714))))
+          (gframe (make-frame 
+                   (make-vect (width 0.472)(height  0))
+                   (make-vect (width 0.375)(height  0))
+                   (make-vect (width 0)    (height  0.48214285714285715)))))
+
+      ((square-limit wave 4) sframe)
+      (if (= 3 (gtk-major-version))
+          ((square-limit (paint-image roger) 4) gframe) #f)
+      ((square-limit (sierpinski 6) 0) frame)
+      ((square-limit (tree 10) 0) dframe))))
