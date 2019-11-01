@@ -26,6 +26,7 @@
 
       ((square-limit wave 4) sframe)
       (if (= 3 (gtk-major-version))
-          ((square-limit (paint-image roger) 4) gframe) #f)
+          ((square-limit (paint-image roger) 4) gframe)
+          ((square-limit mona 4) gframe))
       ((square-limit (sierpinski 6) 0) frame)
       ((square-limit (tree 10) 0) dframe))))
