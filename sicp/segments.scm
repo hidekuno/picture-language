@@ -117,3 +117,44 @@
                    (make-segment (make-vect 0.85 0.2) (make-vect 0.9 0.4)))))
     (segments->painter segments)))
 ;;((square-limit mona 4) frame)
+
+;; from http://www.frank-buss.de/lisp/functional.html
+;; How To Convert
+;;
+;;(let loop ((l a)(r '())(f '()))
+;;  (if (null? l) (cdr (cdr (reverse r)))
+;;      (loop
+;;       (cdr l)
+;;       (append (list (car l)) (list f) r)
+;;       (car l))))
+;;
+;; here is convert data
+(define man
+  (let ((segments
+         (list
+          (make-segment (make-vect 0.42857142857142855 0.5)(make-vect 0.0 0.5))
+          (make-segment (make-vect 0.0 0.5)(make-vect 0.0 0.6))
+          (make-segment (make-vect 0.0 0.6)(make-vect 0.42857142857142855 0.6))
+          (make-segment (make-vect 0.42857142857142855 0.6)(make-vect 0.42857142857142855 0.7))
+          (make-segment (make-vect 0.42857142857142855 0.7)(make-vect 0.2857142857142857 0.8))
+          (make-segment (make-vect 0.2857142857142857 0.8)(make-vect 0.2857142857142857 0.9))
+          (make-segment (make-vect 0.2857142857142857 0.9)(make-vect 0.42857142857142855 1.0))
+          (make-segment (make-vect 0.42857142857142855 1.0)(make-vect 0.5714285714285714 1.0))
+          (make-segment (make-vect 0.5714285714285714 1.0)(make-vect 0.7142857142857143 0.9))
+          (make-segment (make-vect 0.7142857142857143 0.9)(make-vect 0.7142857142857143 0.8))
+          (make-segment (make-vect 0.7142857142857143 0.8)(make-vect 0.5714285714285714 0.7))
+          (make-segment (make-vect 0.5714285714285714 0.7)(make-vect 0.5714285714285714 0.6))
+          (make-segment (make-vect 0.5714285714285714 0.6)(make-vect 0.7142857142857143 0.6))
+          (make-segment (make-vect 0.7142857142857143 0.6)(make-vect 0.7142857142857143 0.7))
+          (make-segment (make-vect 0.7142857142857143 0.7)(make-vect 0.8571428571428571 0.7))
+          (make-segment (make-vect 0.8571428571428571 0.7)(make-vect 0.8571428571428571 0.5))
+          (make-segment (make-vect 0.8571428571428571 0.5)(make-vect 0.5714285714285714 0.5))
+          (make-segment (make-vect 0.5714285714285714 0.5)(make-vect 0.5714285714285714 0.4))
+          (make-segment (make-vect 0.5714285714285714 0.4)(make-vect 0.7142857142857143 0.0))
+          (make-segment (make-vect 0.7142857142857143 0.0)(make-vect 0.5714285714285714 0.0))
+          (make-segment (make-vect 0.5714285714285714 0.0)(make-vect 0.5 0.2))
+          (make-segment (make-vect 0.5 0.2)(make-vect 0.42857142857142855 0.0))
+          (make-segment (make-vect 0.42857142857142855 0.0)(make-vect 0.2857142857142857 0.0))
+          (make-segment (make-vect 0.2857142857142857 0.0)(make-vect 0.42857142857142855 0.4))
+          (make-segment (make-vect 0.42857142857142855 0.4)(make-vect 0.42857142857142855 0.5)))))
+    (segments->painter segments)))
