@@ -158,3 +158,4 @@
           (make-segment (make-vect 0.2857142857142857 0.0)(make-vect 0.42857142857142855 0.4))
           (make-segment (make-vect 0.42857142857142855 0.4)(make-vect 0.42857142857142855 0.5)))))
     (segments->painter segments)))
+;;((square-limit man 4) frame)
