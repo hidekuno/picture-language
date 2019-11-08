@@ -137,6 +137,12 @@
                   (ycor-vect (edge2-frame f)))))
 
 (define (make-image-frame img scale)
-  (make-frame (make-vect 0.0 0.0)
-              (make-vect (/ (* scale (image-width img)) (screen-width)) 0.0)
-              (make-vect 0.0 (/ (* scale (image-height img)) (screen-height)))))
+  (if (= 2 (gtk-major-version))
+      (make-frame (make-vect 0.0 0.0)
+                  (make-vect (* scale (image-width img)) 0.0)
+                  (make-vect 0.0 (* scale (image-height img))))
+
+      (make-frame (make-vect 0.0 0.0)
+                  (make-vect (/ (* scale (image-width img)) (screen-width)) 0.0)
+                  (make-vect 0.0 (/ (* scale (image-height img)) (screen-height))))))
+
