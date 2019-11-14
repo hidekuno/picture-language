@@ -53,6 +53,6 @@
 
 (define tree-danger
   (segments->painter
-   (tree-danger-iter 
+   (tree-danger-iter
     0.4166666666666667 0.7142857142857143 0.4166666666666667 0.5357142857142857 14)))
 
