@@ -17,7 +17,8 @@
 (define (koch n)
   (lambda (frame)
     (define (koch-iter x0 y0 x1 y1 c)
-      (let ((kcos (cs 60))
+      (let ((m (frame-coord-map frame))
+            (kcos (cs 60))
             (ksin (sn 60)))
         (if (> c 1)
             (let (
@@ -31,13 +32,11 @@
                 (koch-iter xa ya xc  yc (- c 1))
                 (koch-iter xc yc xb  yb (- c 1))
                 (koch-iter xb yb x1  y1 (- c 1))))
-
-            (draw-line-segment (make-segment (make-vect x0 y0) (make-vect x1 y1)) frame))))
+            (draw-line-vect (m (make-vect x0 y0))(m (make-vect x1 y1))))))
 
     (koch-iter 0.3597222222222222 0.0 0.04722222222222222 0.6964285714285714 n)
     (koch-iter 0.04722222222222222 0.6964285714285714 0.6708333333333333 0.6964285714285714 n)
     (koch-iter 0.6708333333333333 0.6964285714285714 0.3597222222222222 0.0 n)))
-
 ;;========================================================================
 ;; ツリーカーブ(paint版)
 ;; ((square-limit (tree 14) 0) frame)
@@ -45,23 +44,24 @@
 (define (tree n)
   (lambda (frame)
     (define (tree-iter x0 y0 x1 y1 c)
-      (let ((tcos (cs 15))
+      (let ((m (frame-coord-map frame))
+            (tcos (cs 15))
             (tsin (sn 45))
             (alpha 0.6))
         (let ((xa (+ x1  (*    tcos (- x1 x0) alpha) (* -1 tsin (- y1 y0) alpha)))
               (ya (+ y1  (*    tsin (- x1 x0) alpha) (*    tcos (- y1 y0) alpha)))
               (xb (+ x1  (*    tcos (- x1 x0) alpha) (*    tsin (- y1 y0) alpha)))
               (yb (+ y1  (* -1 tsin (- x1 x0) alpha) (*    tcos (- y1 y0) alpha))))
-          (draw-line-segment (make-segment (make-vect x0 y0) (make-vect x1 y1)) frame)
+
+          (draw-line-vect (m (make-vect x0 y0))(m (make-vect x1 y1)))
           (if (>= 0 c)
               (begin
-                (draw-line-segment (make-segment (make-vect x1 y1) (make-vect xa ya)) frame)
-                (draw-line-segment (make-segment (make-vect x1 y1) (make-vect xb yb)) frame))
+                (draw-line-vect (m (make-vect x1 y1))(m (make-vect xa ya)))
+                (draw-line-vect (m (make-vect x1 y1))(m (make-vect xb yb))))
               (begin
                 (tree-iter x1 y1 xa ya (- c 1))
                 (tree-iter x1 y1 xb yb (- c 1)))))))
     (tree-iter 0.4166666666666667 0.7142857142857143 0.4166666666666667 0.5357142857142857 n)))
-
 ;;========================================================================
 ;; sierpinski(paint版)
 ;;((square-limit (sierpinski 8) 0) frame)
@@ -69,19 +69,20 @@
 (define (sierpinski n)
   (lambda (frame)
     (define (sierpinski-iter x0 y0 x1 y1 x2 y2 c)
-      (if (> c 1) (let ((xx0 (/ (+ x0 x1) 2))
-                        (yy0 (/ (+ y0 y1) 2))
-                        (xx1 (/ (+ x1 x2) 2))
-                        (yy1 (/ (+ y1 y2) 2))
-                        (xx2 (/ (+ x2 x0) 2))
-                        (yy2 (/ (+ y2 y0) 2)))
-                     (sierpinski-iter x0 y0 xx0 yy0 xx2 yy2 (- c 1))
-                     (sierpinski-iter x1 y1 xx0 yy0 xx1 yy1 (- c 1))
-                     (sierpinski-iter x2 y2 xx2 yy2 xx1 yy1 (- c 1)))
-          (begin
-            (draw-line-segment (make-segment (make-vect x0 y0) (make-vect x1 y1)) frame)
-            (draw-line-segment (make-segment (make-vect x1 y1) (make-vect x2 y2)) frame)
-            (draw-line-segment (make-segment (make-vect x2 y2) (make-vect x0 y0)) frame))))
+      (let ((m (frame-coord-map frame)))
+        (if (> c 1) (let ((xx0 (/ (+ x0 x1) 2))
+                          (yy0 (/ (+ y0 y1) 2))
+                          (xx1 (/ (+ x1 x2) 2))
+                          (yy1 (/ (+ y1 y2) 2))
+                          (xx2 (/ (+ x2 x0) 2))
+                          (yy2 (/ (+ y2 y0) 2)))
+                      (sierpinski-iter x0 y0 xx0 yy0 xx2 yy2 (- c 1))
+                      (sierpinski-iter x1 y1 xx0 yy0 xx1 yy1 (- c 1))
+                      (sierpinski-iter x2 y2 xx2 yy2 xx1 yy1 (- c 1)))
+            (begin
+              (draw-line-vect (m (make-vect x0 y0)) (m (make-vect x1 y1)))
+              (draw-line-vect (m (make-vect x1 y1)) (m (make-vect x2 y2)))
+              (draw-line-vect (m (make-vect x2 y2)) (m (make-vect x0 y0)))))))
     (sierpinski-iter
      0.44428969359331477 0.07168458781362007
      0.04178272980501393 0.7706093189964157
@@ -94,14 +95,15 @@
 (define (dragon-curve n)
   (lambda (frame)
     (define (dragon-curve-iter xa ya xb yb n)
-      (let ((xx (- xb xa))
-            (yy (* -1 (- yb ya))))
+      (let  ((m (frame-coord-map frame))
+             (xx (- xb xa))
+             (yy (* -1 (- yb ya))))
         (let ((xc (+ xa (/ (+ xx yy) 2)))
               (yc (+ yb (/ (+ xx yy) 2))))
           (if (>= 0 n)
               (begin
-                (draw-line-segment (make-segment (make-vect xa ya) (make-vect xc yc)) frame)
-                (draw-line-segment (make-segment (make-vect xb yb) (make-vect xc yc)) frame))
+                (draw-line-vect (m (make-vect xa ya))(m (make-vect xc yc)))
+                (draw-line-vect (m (make-vect xb yb))(m (make-vect xc yc))))
               (begin
                 (dragon-curve-iter xa ya xc yc (- n 1))
                 (dragon-curve-iter xb yb xc yc (- n 1)))))))
@@ -121,8 +123,8 @@
     (define oldy y)
 
     (define (line)
-      (begin
-        (draw-line-segment (make-segment (make-vect oldx oldy) (make-vect x y)) frame)
+      (let ((m (frame-coord-map frame)))
+        (draw-line-vect (m (make-vect oldx oldy))(m (make-vect x y)))
         (set! oldx x)(set! oldy y)))
 
     (define (ldr c)

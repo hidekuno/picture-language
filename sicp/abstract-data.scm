@@ -33,17 +33,6 @@
 (define (end-segment seg) (cdr seg))
 
 ;;========================================================================
-;; フレームに対して線を描画する
-;;========================================================================
-(define (draw-line-segment segment f)
-  (let ((m (frame-coord-map f))
-        (s (start-segment segment))
-        (e (end-segment segment)))
-    (draw-line (xcor-vect (m s))
-               (ycor-vect (m s))
-               (xcor-vect (m e))
-               (ycor-vect (m e)))))
-;;========================================================================
 ;; ベクトルの構築子
 ;;========================================================================
 (define (make-vect x y) (cons x y))

@@ -109,10 +109,17 @@
 ;;========================================================================
 ;; 線分を描画する
 ;;========================================================================
+(define (draw-line-vect s e)
+        (draw-line (xcor-vect s)(ycor-vect s)(xcor-vect e)(ycor-vect e)))
+
 (define (segments->painter segment-list)
   (lambda (frame)
-    (for-each (lambda (segment)(draw-line-segment segment frame)) segment-list)))
-
+    (let ((m (frame-coord-map frame)))
+      (for-each
+       (lambda (segment)
+         (draw-line-vect
+          (m (start-segment segment))
+          (m (end-segment segment)))) segment-list))))
 ;;========================================================================
 ;; イメージを描画する
 ;;========================================================================
