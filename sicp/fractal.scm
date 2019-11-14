@@ -83,8 +83,8 @@
             (draw-line-segment (make-segment (make-vect x0 y0) (make-vect x1 y1)) frame)
             (draw-line-segment (make-segment (make-vect x1 y1) (make-vect x2 y2)) frame)
             (draw-line-segment (make-segment (make-vect x2 y2) (make-vect x0 y0)) frame))))
-    (sierpinski-iter 
-     0.44428969359331477 0.07168458781362007 
+    (sierpinski-iter
+     0.44428969359331477 0.07168458781362007
      0.04178272980501393 0.7706093189964157
      0.8481894150417827 0.7706093189964157 n)))
 

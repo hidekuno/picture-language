@@ -7,19 +7,19 @@
 (define (demo)
   (let ((width  (lambda (n)(if (= 2 (gtk-major-version))(* n (screen-width)) n)))
         (height (lambda (n)(if (= 2 (gtk-major-version))(* n (screen-height))n))))
-    (let ((dframe (make-frame 
+    (let ((dframe (make-frame
                    (make-vect (width 0.45)(height 0.55))
                    (make-vect (width 0.45)(height 0))
                    (make-vect (width 0   )(height 0.45))))
-          (frame  (make-frame 
+          (frame  (make-frame
                    (make-vect (width 0)   (height 0.57))
                    (make-vect (width 0.45)(height   0))
                    (make-vect (width 0)   (height 0.45))))
-          (sframe (make-frame 
+          (sframe (make-frame
                    (make-vect (width 0)   (height  0))
                    (make-vect (width 0.45)(height  0))
                    (make-vect (width 0)   (height  0.5714285714285714))))
-          (gframe (make-frame 
+          (gframe (make-frame
                    (make-vect (width 0.472)(height  0))
                    (make-vect (width 0.375)(height  0))
                    (make-vect (width 0)    (height  0.48214285714285715)))))
