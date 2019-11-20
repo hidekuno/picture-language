@@ -7,4 +7,5 @@
 (begin
   (load-url "sicp/abstract-data.scm")
   (load-url "sicp/painter.scm")
-  (load-url "sicp/fractal.scm"))
+  (load-url "sicp/fractal.scm")
+  (load-url "sicp/demo.scm"))
