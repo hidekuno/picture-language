@@ -6,7 +6,7 @@
 ;
 (define roger "roger")
 
-(if (= 2 (gtk-major-version))
+(if (> 3 (gtk-major-version))
     (load-image roger "https://github.com/hidekuno/picture-language/blob/master/sicp/sicp.png?raw=true")
     (create-image-from-png roger
                            (string-append (get-environment-variable "HOME") "/picture-language/sicp/sicp.png")))

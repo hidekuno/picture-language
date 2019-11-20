@@ -6,7 +6,7 @@
 ; hidekuno@gmail.com
 ;
 (define frame
-  (if (= 2 (gtk-major-version))
+  (if (> 3 (gtk-major-version))
       (make-frame (make-vect 0 0) (make-vect (screen-width) 0) (make-vect 0 (screen-height)))
       (make-frame (make-vect 0 0) (make-vect 1 0) (make-vect 0 1))))
 
