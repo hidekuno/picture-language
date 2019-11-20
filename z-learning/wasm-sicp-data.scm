@@ -16,3 +16,4 @@
 (define ps (paint-image "ps"))
 (define sd (paint-image "sd"))
 (define am (paint-image "am"))
+(define (music-frame)(lambda (scale) (make-image-frame "am" scale)))
