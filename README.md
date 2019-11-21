@@ -4,6 +4,7 @@
 ## 概要
 - SICPの図形言語プログラムを実装
 - 詳細は(https://sicp.iijlab.net/fulltext/x224.html)
+- square-limitについて(https://www.ipsj.or.jp/07editj/promenade/4610.pdf)
 
 rust-elispでの実行例(https://github.com/hidekuno/rust-elisp)
 
