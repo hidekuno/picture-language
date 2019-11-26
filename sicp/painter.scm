@@ -132,13 +132,18 @@
                   (ycor-vect (edge1-frame f))
                   (xcor-vect (edge2-frame f))
                   (ycor-vect (edge2-frame f)))))
+;;========================================================================
+;; イメージ用のフレームを作成する
+;;========================================================================
+(define (make-image-frame-rectangle img w-scale h-scale)
+  (let ((coord (if (> 3 (gtk-major-version))
+                   (cons (image-width img)(image-height img))
+                   (cons (/ (image-width img)(screen-width))
+                         (/ (image-height img)(screen-height))))))
+
+      (make-frame (make-vect 0.0 0.0)
+                  (make-vect (* w-scale (car coord)) 0.0)
+                  (make-vect 0.0 (* h-scale (cdr coord))))))
 
 (define (make-image-frame img scale)
-  (if (> 3 (gtk-major-version))
-      (make-frame (make-vect 0.0 0.0)
-                  (make-vect (* scale (image-width img)) 0.0)
-                  (make-vect 0.0 (* scale (image-height img))))
-
-      (make-frame (make-vect 0.0 0.0)
-                  (make-vect (/ (* scale (image-width img))(screen-width)) 0.0)
-                  (make-vect 0.0 (/ (* scale (image-height img))(screen-height))))))
+  (make-image-frame-rectangle img scale scale))
