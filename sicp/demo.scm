@@ -3,7 +3,6 @@
 ;
 ; hidekuno@gmail.com
 ;
-
 (define (demo)
   (let ((width  (lambda (n)(if (= 3 (gtk-major-version)) n (* n (screen-width)))))
         (height (lambda (n)(if (= 3 (gtk-major-version)) n (* n (screen-height))))))
@@ -27,6 +26,6 @@
       ((square-limit wave 4) sframe)
       (if (= 2 (gtk-major-version))
           ((square-limit mona 4) gframe)
-          ((square-limit (paint-image roger) 4) gframe))
+          ((square-limit roger 4) gframe))
       ((square-limit (sierpinski 6) 0) frame)
       ((square-limit (tree 10) 0) dframe))))
