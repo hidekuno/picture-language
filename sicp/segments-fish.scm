@@ -148,6 +148,11 @@
 ;;  (below (beside (flip-vert fish1)(flip-vert fish2))
 ;;         (beside (flip-vert fish3)(flip-vert fish4))) 4) frame)
 
+(define
+  fish
+  (beside (below (rotate270 (flip-vert fish2))
+                 (flip-horiz fish2))
+          (below (flip-vert fish2)
+                 (rotate90 (flip-vert fish2)))))
 ;; ex.
-;;
-;; (beside (below (rotate270 (flip-vert fish2)) (flip-horiz fish2))(below (flip-vert fish2)(rotate90 (flip-vert fish2))))
+;; ((square-limit fish 4) frame)
