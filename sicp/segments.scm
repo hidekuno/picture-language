@@ -5,11 +5,25 @@
 ;
 ; hidekuno@gmail.com
 ;
-(define frame
-  (if (> 3 (gtk-major-version))
-      (make-frame (make-vect 0 0) (make-vect (screen-width) 0) (make-vect 0 (screen-height)))
-      (make-frame (make-vect 0 0) (make-vect 1 0) (make-vect 0 1))))
 
+;;========================================================================
+;; 線分の構築子と描画処理
+;;========================================================================
+(define (make-segment start end) (cons start end))
+(define (start-segment seg) (car seg))
+(define (end-segment seg) (cdr seg))
+
+(define (segments->painter segment-list)
+  (lambda (frame)
+    (let ((m (frame-coord-map frame)))
+      (for-each
+       (lambda (segment)
+         (draw-line-vect
+          (m (start-segment segment))
+          (m (end-segment segment)))) segment-list))))
+;;========================================================================
+;; 以下各図形
+;;========================================================================
 (define outline
   (let ((v0 (make-vect 0.0 0.0))
         (v1 (make-vect 1.0 0.0))
