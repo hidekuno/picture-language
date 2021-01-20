@@ -9,16 +9,19 @@
 (load-image "am" "https://coverartarchive.org/release-group/e2f503d7-5488-3fe1-b3ac-f236d9f1b44c/front-250.jpg")
 
 (load-url "sicp/abstract-data.scm")
+(load-url "sicp/frame.scm")
+(load-url "sicp/util.scm")
 (load-url "sicp/painter.scm"
           (begin
             (load-url "sicp/segments.scm")
-            (load-url "sicp/segments-fish.scm")
-            (load-url "sicp/fractal.scm")
-            (load-url "sicp/demo.scm")
-            (load-image "roger" "https://github.com/hidekuno/picture-language/blob/master/sicp/sicp.png?raw=true"
-                        (define gframe (make-image-frame "roger" 3)))
-            (define rv (paint-image "rv"))
-            (define ps (paint-image "ps"))
-            (define sd (paint-image "sd"))
-            (define am (paint-image "am"))
-            (define roger (paint-image "roger"))))
+            (begin
+              (load-url "sicp/fractal.scm")
+              (load-url "sicp/demo.scm")
+              (load-url "sicp/segments-fish.scm")
+              (load-image "roger" "https://github.com/hidekuno/picture-language/blob/master/sicp/sicp.png?raw=true"
+                          (define gframe (make-image-frame "roger" 3)))
+              (define rv (paint-image "rv"))
+              (define ps (paint-image "ps"))
+              (define sd (paint-image "sd"))
+              (define am (paint-image "am"))
+              (define roger (paint-image "roger")))))

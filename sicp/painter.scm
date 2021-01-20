@@ -6,8 +6,9 @@
 ;
 ;;======================================================================
 ;; ペインタとフレームの変換法の情報をとり, 新しいペインタを作る
+;; (フレームを変形させる)
 ;;
-;; ペインタは規定した平行四辺形の フレームの中に合うように,
+;; ペインタは規定した平行四辺形のフレームの中に合うように,
 ;; ずらしたり大きさを変えたりした画像を描く
 ;;======================================================================
 (define (transform-painter painter origin corner1 corner2)
@@ -105,45 +106,3 @@
   (let ((quarter (corner-split painter n)))
         (let ((half (beside (flip-horiz quarter) quarter)))
           (below (flip-vert half) half))))
-
-;;========================================================================
-;; 線分を描画する
-;;========================================================================
-(define (draw-line-vect s e)
-        (draw-line (xcor-vect s)(ycor-vect s)(xcor-vect e)(ycor-vect e)))
-
-(define (segments->painter segment-list)
-  (lambda (frame)
-    (let ((m (frame-coord-map frame)))
-      (for-each
-       (lambda (segment)
-         (draw-line-vect
-          (m (start-segment segment))
-          (m (end-segment segment)))) segment-list))))
-;;========================================================================
-;; イメージを描画する
-;;========================================================================
-(define (paint-image image-name)
-    (lambda (f)
-      (draw-image image-name
-                  (xcor-vect (origin-frame f))
-                  (ycor-vect (origin-frame f))
-                  (xcor-vect (edge1-frame f))
-                  (ycor-vect (edge1-frame f))
-                  (xcor-vect (edge2-frame f))
-                  (ycor-vect (edge2-frame f)))))
-;;========================================================================
-;; イメージ用のフレームを作成する
-;;========================================================================
-(define (make-image-frame-rectangle img w-scale h-scale)
-  (let ((coord (if (> 3 (gtk-major-version))
-                   (cons (image-width img)(image-height img))
-                   (cons (/ (image-width img)(screen-width))
-                         (/ (image-height img)(screen-height))))))
-
-      (make-frame (make-vect 0.0 0.0)
-                  (make-vect (* w-scale (car coord)) 0.0)
-                  (make-vect 0.0 (* h-scale (cdr coord))))))
-
-(define (make-image-frame img scale)
-  (make-image-frame-rectangle img scale scale))
