@@ -9,8 +9,8 @@
 (load-image "am" "https://coverartarchive.org/release-group/e2f503d7-5488-3fe1-b3ac-f236d9f1b44c/front-250.jpg")
 
 (load-url "sicp/abstract-data.scm")
-(load-url "frame.scm")
-(load-url "util.scm")
+(load-url "sicp/frame.scm")
+(load-url "sicp/util.scm")
 (load-url "sicp/painter.scm"
           (begin
             (load-url "sicp/segments.scm")
