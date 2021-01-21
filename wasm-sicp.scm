@@ -17,12 +17,13 @@
                                       (define roger (paint-image "roger"))))))
             (load-url "sicp/util.scm")
             (load-url "sicp/painter.scm"
-            (load-url "sicp/segments.scm"
                       (begin
-                        (load-url "sicp/fractal.scm")
-                        (load-url "sicp/demo.scm")
-                        (load-url "sicp/segments-fish.scm")
-                        (define rv (paint-image "rv"))
-                        (define ps (paint-image "ps"))
-                        (define sd (paint-image "sd"))
-                        (define am (paint-image "am")))))))
+                        (load-url "sicp/segments.scm"
+                                  (begin
+                                    (load-url "sicp/fractal.scm")
+                                    (load-url "sicp/demo.scm")
+                                    (load-url "sicp/segments-fish.scm")
+                                    (define rv (paint-image "rv"))
+                                    (define ps (paint-image "ps"))
+                                    (define sd (paint-image "sd"))
+                                    (define am (paint-image "am"))))))))
