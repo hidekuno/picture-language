@@ -3,9 +3,11 @@
 ;
 ; hidekuno@gmail.com
 ;
-(define (hilbert-demo n frame)
+(define (hilbert-demo)(draw-hilbert 6))
+
+(define (hilbert-sicp-demo)
   ((transform-painter
-    (hilbert n)
+    (hilbert 6)
     (make-vect 0.15 0.0)
     (make-vect 0.9 0.0)
     (make-vect 0.15 0.75)) frame))

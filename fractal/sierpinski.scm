@@ -3,11 +3,11 @@
 ;
 ; hidekuno@gmail.com
 ;
-(define (sierpinski-demo n)((sierpinski n) frame))
+(define (sierpinski-demo)(draw-sierpinski 8))
 
-(define (sierpinski-geometric-demo n)
+(define (sierpinski-sicp-demo)
   ((transform-painter
-    (sierpinski n)
+    (sierpinski 8)
     (make-vect 0.0 0.0)
     (make-vect 0.75 0.25)
     (make-vect 0.25 0.75)) frame))

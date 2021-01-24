@@ -3,11 +3,11 @@
 ;
 ; hidekuno@gmail.com
 ;
-(define (koch-demo n)((koch n) frame))
+(define (koch-demo)(draw-koch 4))
 
-(define (koch-geometric-demo n)
+(define (koch-sicp-demo)
   ((transform-painter
-    (koch n)
+    (koch 4)
     (make-vect 0.0 0.0)
     (make-vect 0.75 0.25)
     (make-vect 0.25 0.75)) frame))

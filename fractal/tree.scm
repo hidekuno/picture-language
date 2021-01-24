@@ -4,11 +4,11 @@
 ; hidekuno@gmail.com
 ;
 ;
-(define (tree-demo n)((tree n) frame))
+(define (tree-demo)(draw-tree 14))
 
-(define (tree-geometric-demo n)
+(define (tree-sicp-demo)
   ((transform-painter
-    (tree n)
+    (tree 14)
     (make-vect 0.0 0.0)
     (make-vect 0.75 0.25)
     (make-vect 0.25 0.75)) frame))
