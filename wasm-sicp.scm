@@ -11,11 +11,12 @@
           (begin
             (load-url "sicp/frame.scm"
                       (begin
-                        (load-image "roger" "https://github.com/hidekuno/picture-language/blob/master/sicp/sicp.png?raw=true"
+                        (load-image
+                         "roger"
+                         "https://github.com/hidekuno/picture-language/blob/master/sicp/sicp.png?raw=true"
                                     (begin
                                       (define gframe (make-image-frame "roger" 3))
                                       (define roger (paint-image "roger"))))))
-            (load-url "sicp/util.scm")
             (load-url "sicp/painter.scm"
                       (begin
                         (load-url "sicp/segments.scm"
@@ -23,7 +24,9 @@
                                     (load-url "sicp/fractal.scm")
                                     (load-url "sicp/demo.scm")
                                     (load-url "sicp/segments-fish.scm")
-                                    (define rv (paint-image "rv"))
-                                    (define ps (paint-image "ps"))
-                                    (define sd (paint-image "sd"))
-                                    (define am (paint-image "am"))))))))
+                                    (load-url "sicp/util.scm"
+                                              (begin
+                                                (define rv (paint-image "rv"))
+                                                (define ps (paint-image "ps"))
+                                                (define sd (paint-image "sd"))
+                                                (define am (paint-image "am"))))))))))
