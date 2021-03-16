@@ -12,19 +12,15 @@
 (load-url "sicp/abstract-data.scm"
           (begin
             (load-url "sicp/frame.scm"
-                      (begin
-                        (define gframe (make-image-frame "roger" 3))))
+                      (begin (define gframe (make-image-frame "roger" 3))))
             (load-url "sicp/painter.scm"
                       (begin
-                        (load-url "sicp/segments.scm"
-                                  (begin
-                                    (load-url "sicp/fractal.scm")
-                                    (load-url "sicp/demo.scm")
-                                    (load-url "sicp/segments-fish.scm")
-                                    (load-url "sicp/util.scm"
-                                              (begin
-                                                (define rv (paint-image "rv"))
-                                                (define ps (paint-image "ps"))
-                                                (define sd (paint-image "sd"))
-                                                (define am (paint-image "am"))
-                                                (define roger (paint-image "roger"))))))))))
+                        (define rv (paint-image "rv"))
+                        (define ps (paint-image "ps"))
+                        (define sd (paint-image "sd"))
+                        (define am (paint-image "am"))
+                        (define roger (paint-image "roger"))))
+            (load-url "sicp/segments.scm"
+                      (begin (load-url "sicp/segments-fish.scm")))
+            (load-url "sicp/fractal.scm")
+            (load-url "sicp/demo.scm")))

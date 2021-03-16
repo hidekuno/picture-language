@@ -3,7 +3,6 @@
 (load-file (string-append path "abstract-data.scm"))
 (load-file (string-append path "segments.scm"))
 (load-file (string-append path "painter.scm"))
-(load-file (string-append path "util.scm"))
 (load-file (string-append path "frame.scm"))
 (load-file (string-append path "demo.scm"))
 (load-file (string-append path "fractal.scm"))

@@ -106,3 +106,15 @@
   (let ((quarter (corner-split painter n)))
         (let ((half (beside (flip-horiz quarter) quarter)))
           (below (flip-vert half) half))))
+
+;;========================================================================
+;; 線分を描画する
+;;========================================================================
+(define (draw-line-vect s e)(draw-line s e))
+
+;;========================================================================
+;; イメージを描画する
+;;========================================================================
+(define (paint-image image-name)
+  (lambda (f)
+    (draw-image image-name (origin-frame f)(edge1-frame f)(edge2-frame f))))
