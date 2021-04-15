@@ -3,7 +3,8 @@ Implementation of graphic language
 
 ## Overview
 - Implemented SICP graphic language program
-- See the URL for details(https://sicp.iijlab.net/fulltext/x224.html)
+- See the URL about SICP (https://mitpress.mit.edu/sites/default/files/sicp/index.html)
+- See the URL for Picture Language(https://mitpress.mit.edu/sites/default/files/sicp/full-text/book/book-Z-H-15.html#%_sec_2.2.4)
 - See the URL for square-limit(https://www.ipsj.or.jp/07editj/promenade/4610.pdf)
 - Creating a document with jupyter-notebook(https://github.com/hidekuno/jupyter-sicp)
 
