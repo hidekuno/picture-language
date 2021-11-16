@@ -1,4 +1,4 @@
-Implementation of graphic language
+Implementation of Picture Language
 =================
 
 ## Overview
