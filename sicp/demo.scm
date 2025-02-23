@@ -29,3 +29,12 @@
           ((square-limit roger 4) gframe))
       ((square-limit (sierpinski 6) 0) frame)
       ((square-limit (tree 10) 0) dframe))))
+
+(define (paint obj vectors)
+  (define (list2vect l)(make-vect (car l)(cadr l)))
+  ((transform-painter
+    obj
+    (list2vect (car vectors))
+    (list2vect (cadr vectors))
+    (list2vect (car (cdr (cdr vectors)))))
+   frame))
